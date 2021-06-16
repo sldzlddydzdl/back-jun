@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		int[] GetScore = new int[9];
+		
+		int[] scores = {100, 100, 200 ,200 , 300 ,300, 400 , 400 ,500};
+		
+		String result = "";
+		int sum = 0;
+		
+		for(int i = 0 ; i < 9; i++) {
+			GetScore[i] =sc.nextInt();
+			if(GetScore[i] > scores[i]) {
+				result = "hacker";
+				continue;
+			}
+			sum += GetScore[i];
+		}
+		
+		if(sum >= 100 && result != "hacker") {
+			result = "draw";
+		}
+		
+		else if (sum < 100 && result != "hacker") {
+			result = "none";
+		}
+		
+		System.out.println(result);
+		
+	}
+}

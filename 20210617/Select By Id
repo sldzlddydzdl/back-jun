@@ -1,0 +1,7 @@
+
+query :
+select * from city where id = 1661;
+
+
+result : 
+1661 Sayama JPN Saitama 162472

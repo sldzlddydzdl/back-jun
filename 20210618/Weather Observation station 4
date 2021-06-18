@@ -1,0 +1,6 @@
+query :
+select count(city)-count(distinct(city)) from station;
+
+result : 
+
+13

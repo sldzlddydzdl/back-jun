@@ -1,0 +1,48 @@
+package main;
+import java.util.*;
+
+public class Main {
+
+	public static boolean[] isVisited;
+	public static char[] result;
+	
+	public static void main(String[] args) {
+		
+       // Please Enter Your Code Here
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int r = sc.nextInt();
+        
+        isVisited = new boolean[15];
+        result = new char[15];
+        
+        if( n > 7 && r > 7 ) {
+        	r = Math.min(n, 7);
+        }
+        else if(n > 7 && r < 7) {
+//        	r = r;
+        }
+        int index = 0;
+        Alpha(n , r, index);
+	
+	}
+	
+	public static void Alpha(int n , int r, int index) {
+		if(index >= r) {
+			for(int i = 0; i < r; i ++) {
+				System.out.print(result[i]);
+			}
+			System.out.println();
+		} else {
+			for(int i = 0 ; i < n; i++) {
+				if(!isVisited[i]) {
+					result[index] = (char) ( i+ (int)('a'));
+					isVisited[i] = true;
+					Alpha(n , r, index + 1);
+					isVisited[i] = false;
+				}
+			}
+		}
+	}
+}

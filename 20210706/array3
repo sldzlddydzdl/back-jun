@@ -1,0 +1,30 @@
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+
+      // Please Enter Your Code Here
+      Scanner sc = new Scanner(System.in);
+       
+      int N = sc.nextInt();       
+      
+      int RowCnt = 0;
+      int ColCnt = 2;
+      int start = 1;
+      int temp = start;
+      for(int i = 1; i <= N; i++){
+        temp = start;
+        for(int j = N; j >= i; j--){
+          System.out.print(start + " ");
+          RowCnt++;
+          start += RowCnt;
+        }
+        start = temp;
+        start += ColCnt;
+        ColCnt++;
+        RowCnt = i;
+        System.out.println();
+      }
+      
+      
+    }
+}

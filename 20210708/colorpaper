@@ -1,0 +1,61 @@
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+
+       // Please Enter Your Code Here
+      Scanner sc = new Scanner(System.in);
+      
+      int N = sc.nextInt();
+      
+      int[][] field = new int[6][6];
+      int[][] square = new int[N][4];
+      int[][][] area = new int[N][101][101];
+      
+      for(int i = 0 ; i < N; i++){
+        for(int j = 0 ; j < 4 ; j++){
+          square[i][j] = sc.nextInt();
+        }
+      }
+      
+      int temp0 = 0;
+      int temp1 = 0;
+      for(int i = 0 ; i < N; i++){
+    	  temp0 = square[i][0];
+    	  temp1 = square[i][1];
+        while(square[i][1] < square[i][3]+temp1){
+          while(square[i][0] < square[i][2]+temp0 ){
+            area[i][square[i][1]][square[i][0]] = 1;
+            square[i][0]++;
+          }
+          square[i][1]++;
+          square[i][0] = temp0;
+        }
+        square[i][1] = temp1;
+        
+      }
+      
+      for(int i = 0 ; i < N; i++ ) {
+    	  for(int j = i+1 ; j < N; j++) {
+    		  for(int k = 0 ; k < 101; k++) {
+    			  for(int s = 0; s < 101; s ++) {
+    				  if(area[i][k][s] == 1 && area[j][k][s] == 1 ) {
+    					  area[i][k][s] = 0;
+    				  }
+    			  }
+    		  }
+    	  }
+      }
+      
+      int sum = 0;
+      for(int i = 0 ; i < N; i++) {
+    	  for(int j = 0 ; j < 101; j++) {
+    		  for(int k = 0 ; k < 101; k++) {
+    			  sum += area[i][j][k];
+    		  }
+    	  }
+    	  System.out.println(sum);
+    	  sum = 0;
+      }
+      
+    }
+}

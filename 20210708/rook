@@ -1,0 +1,84 @@
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+
+       // Please Enter Your Code Here
+      Scanner sc = new Scanner(System.in);
+      
+      int[][] field = new int[8][8];
+      
+      boolean checkMate = true;
+      
+      for(int i = 0; i < 8 ; i++){
+        for(int j = 0; j < 8; j++){
+          field[i][j] = sc.nextInt();
+        }
+      }
+
+      for(int i = 0 ; i < 8; i++){
+        for(int j = 0 ; j < 8; j++){
+          if(field[i][j] == 1){ // 해당 행에 킹이있어
+          
+            for(int k = 0 ; k < 8; k++){
+              if(field[i][k] == 2){ // 킹이 있는 열에 룩이 있어
+                for(int s = 0; s < 8; s++){ 
+                  if(s != k && s != j && field[i][s] == 3 && s > j && s < k   ){ // 3 이 있으면   1 3 2
+                     // 출력 0;
+                     
+                     checkMate = false;
+                     
+                  } 
+                  else if ( s!= k && s != j && field[i][s] == 3 && s < j && s > k){ // 2 3 1
+                    
+                    checkMate = false;
+                  
+                  }
+                }
+              }
+        
+            }
+          }
+
+        }
+      }
+      
+    
+	      for(int i = 0 ; i < 8; i ++) {
+	    	  for(int j = 0 ; j < 8 ; j ++) {
+	              if(field[j][i] == 1){ // 해당 열에 킹이 있어
+	                  for(int k = 0 ; k < 8 ; k++){
+	                    
+	                    if(field[k][i] == 2){ // 킹이 있는 열에 룩이 있어
+	                      for(int s = 0 ; s < 8; s++){
+	                        if( s != k && s!= j && field[s][i] == 3 && s > j && s < k ) { // 위 1 중간 3 아래 2
+	                          
+	                          checkMate2 = false;
+	                          
+	                        }
+	                        else if( s!= k && s != j && field[s][i] == 3 && s < j && s > k){ // 위 2 중간 3 아래 1
+	                          
+	                          checkMate2 = false;
+	                          
+	                        }
+	//                        else{
+	//                          checkMate = true;
+	//                        }
+	                      }
+	                    }
+
+	                  }
+	              }
+	    	  }
+	      }
+      
+     
+      
+      if(checkMate == false){
+        System.out.println(0);
+      }
+      else{
+        System.out.println(1);
+      }
+
+    }
+}

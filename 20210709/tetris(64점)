@@ -1,0 +1,97 @@
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+
+     Scanner sc = new Scanner(System.in);
+    	      
+    	      int C = sc.nextInt();
+    	      int R = sc.nextInt();
+    	      
+    	      int[][] tetris = new int[R][C];
+    	      
+     	      boolean Nothing = true;
+    	      
+    	      for(int i =0 ; i < tetris.length; i++ ){
+    	        for(int j = 0 ; j < tetris[i].length; j++){
+    	          tetris[i][j] = sc.nextInt();
+    	        }
+    	      }
+    	      
+    	      int positiveCount = 0;
+    	      boolean[] ColVisited = new boolean[C]; // true 이면 놓을수 없다. false 이면 놓을 수 있다.
+    	      
+    	      for(int i = 0; i < C; i++){
+    	        for(int j = 0 ; j < R; j++){
+    	          if(tetris[j][i] == 0 ){
+    	            positiveCount++;
+    	          }
+    	          else if(positiveCount == 4){
+    	        	  ColVisited[i] = false;
+    	          }
+    	          else if(tetris[j][i] == 1 && positiveCount < 4){
+    	        	  ColVisited[i] = true; 
+    	          }
+    	        }
+    	        positiveCount = 0;
+    	      }
+    	      
+    	      int[][] Row = new int[R][C];
+    	      int zeroCount = 0;
+    	      for(int i = 0 ; i < tetris.length; i++) {
+    	    	  for(int j = 0; j < tetris[i].length; j++) {
+    	    		  if(tetris[i][j] == 0) {
+    	    			  zeroCount++;
+    	    		  }
+    	    	  }
+    	    	  for(int j = 0; j< tetris[i].length; j++) {
+    	    		  if(zeroCount == 1 && tetris[i][j] == 0 && ColVisited[j] == false) {
+    	    			  Row[i][j] = 1;
+  			   			 
+    	    		  }
+    	    	  }
+    	    	  zeroCount =0;
+    	      }
+    	      
+    	      int max = 0;
+    	      for(int i = 0 ; i < Row.length; i++) {
+    	    	  for(int j = 0 ; j < Row[i].length; j++) {
+    	    		  max += Row[i][j];
+    	    	  }
+    	      }
+    	      
+    	      int ResultRow = 0;
+   
+    	      for(int i = 0 ; i < Row.length; i++) {
+    	    	  for(int j = 0 ; j < Row[i].length; j++) {
+    	    		  if(Row[i][j] == 1) {
+    	    			  ResultRow = j+1;
+    	    		  }
+    	    	  }
+    	      }
+    	      
+    	      int lastCount = 0;
+    	      int tetrisCount = 0;
+    	      for(int i = 0 ; i < C; i++){
+    	        for(int j = 0 ; j < R; j++){
+    	          if(tetris[j][i] == 0){
+    	            lastCount++;
+    	          }
+    	        }
+    	        if(lastCount == R){
+    	          tetrisCount++;
+    	        }
+    	        lastCount = 0;
+    	      }
+    	      
+    	      if(tetrisCount >= 2) {
+    	    	  System.out.println(0);
+    	      }
+    	      else {
+    	    	  System.out.println(ResultRow + " " + max);
+    	      }
+      
+      
+      
+      
+    }
+}

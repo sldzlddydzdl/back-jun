@@ -1,0 +1,44 @@
+import java.util.*;
+public class Main{
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+        String zip = sc.next();
+
+        int count = 1;
+
+        for(int i = 0; i < zip.length()-1; i++) {
+            if(zip.charAt(i) == zip.charAt(i+1)) { //다음 단어와 같을때
+                    count += 1;
+                if(i == zip.length()-2) {
+                	if(count == 1) {
+                		System.out.print(zip.charAt(i));
+                	}
+                	else {
+                		System.out.print(String.valueOf(count)+zip.charAt(i+1)); // 마지막 값이 같을때 
+                	}
+                }
+            }else{ // 단어가 다를때
+            	if(count == 1) {
+            		System.out.print(zip.charAt(i));
+            	}
+            	else {
+            		System.out.print(String.valueOf(count)+zip.charAt(i)); // 이전에 값 출력
+            	}
+                count = 1;
+                // if(i == zip.length()-2) {
+              //   	if(count == 1) {
+              //   		System.out.print(zip.charAt(i));
+              //   	}
+              //   	else {
+              //   		System.out.print(String.valueOf(count)+zip.charAt(i+1)); // 마지막값 전과 마지막값이 다를때
+            		// }
+              //   }
+            }
+        }
+        
+        if(zip.charAt(zip.length()-2) != zip.charAt(zip.length()-1)) {
+        	System.out.print(zip.charAt(zip.length()-1));
+        }
+    }
+}

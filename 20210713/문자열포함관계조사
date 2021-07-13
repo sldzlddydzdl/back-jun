@@ -1,0 +1,52 @@
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+
+       // Please Enter Your Code Here
+      Scanner sc = new Scanner(System.in);
+      
+      String first = sc.next();
+      String second = sc.next();
+      
+      boolean result = false;
+      
+      char[] firstC = first.toCharArray();
+      char[] secondC = second.toCharArray();
+      
+      int count = 0;
+      
+      for(int i = 0 ; i < firstC.length; i++) {
+    	  if(firstC[i] == secondC[0]) {
+			
+    		  int fstart = i;
+    		  int Sstart = 0;
+    		  while(fstart < i+secondC.length) {
+    			  
+    			  if(firstC[fstart] == secondC[Sstart]) {
+    				  count++;
+    			  }
+    			  fstart++;
+    			  Sstart++;
+    			  if(fstart == firstC.length) {
+    				  break;
+    			  }
+    		  }
+    		  if(count == secondC.length) {
+    			  result = true;
+    		  }
+    		  else {
+    			  count = 0;
+    		  }
+		  }
+    	  
+      }
+      
+      if(result == true) {
+    	  System.out.println("YES");
+      }
+      else {
+    	  System.out.println("NO");
+      }
+      
+    }
+}

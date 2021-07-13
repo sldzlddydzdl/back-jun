@@ -1,0 +1,143 @@
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+
+      // Please Enter Your Code Here
+      Scanner sc = new Scanner(System.in);
+      
+      int R = sc.nextInt();
+      int C = sc.nextInt();
+      
+      int Number = sc.nextInt();
+      
+      int[][] seat = new int[C][R];
+      
+      int maxNum= R*C;
+      
+      List<XY> XYnum = new ArrayList<>();
+      
+      int leftStart = seat[0].length-2;
+      int leftColStart = seat.length-1;
+      int leftEnd = 1;
+      int leftStartTemp = leftStart;
+      
+      int upStart = seat.length-1;
+      int upStartRow = 0;
+      int upEnd = 0;
+      int upStartTemp = upStart;
+      
+      int rightStart =1;
+      int rightColStart = 0;
+      int rightEnd = seat[0].length-1;
+      int rightStartTemp = rightStart;
+      
+      int downStart = 1;
+      int downRowStart = seat[0].length-1;
+      int downEnd = seat.length-1; 
+      int downStartTemp = downStart;
+      
+      
+      int startCount =1;
+      int x = 1;
+      int y = 1;
+      
+      while(startCount <= maxNum){
+        while(upStart >= upEnd){
+          XYnum.add(new XY(startCount , x, y));
+          seat[upStart][upStartRow] = startCount;
+          startCount++;
+          upStart--;
+          y++;
+          
+        }
+        upStartTemp--;
+        upStart = upStartTemp;
+        upStartRow++;
+        upEnd++;
+        y--;
+        while(rightStart <= rightEnd){
+          x++;
+          XYnum.add(new XY(startCount, x , y));
+          seat[rightColStart][rightStart] = startCount;
+          startCount++;
+          rightStart++;
+          
+        }
+        rightStartTemp++;
+        rightStart = rightStartTemp;
+        rightColStart++;
+        rightEnd--;
+        
+        while(downStart <= downEnd){
+          y--;
+          XYnum.add(new XY(startCount, x, y));
+          seat[downStart][downRowStart] = startCount;
+          startCount++;
+          downStart++;
+          
+        }
+        downStartTemp++;
+        downStart = downStartTemp;
+        downRowStart--;
+        downEnd--;
+        
+        while(leftStart >= leftEnd){
+          x--;
+          XYnum.add(new XY(startCount , x, y));
+          seat[leftColStart][leftStart] = startCount;
+          startCount++;
+          leftStart--;
+          
+        }
+        leftStartTemp--;
+        leftStart = leftStartTemp;
+        leftColStart--;
+        leftEnd++;
+        y++;
+      }
+
+      // for(int i = 0 ; i < seat.length; i++){
+      //   for(int j = 0 ; j < seat[i].length; j++){
+      //     System.out.print(seat[i][j] + " ");
+      //   }
+      //   System.out.println();
+      // }
+
+      // for(int i = 0 ; i < seat.length; i++){
+      //   for(int j = 0 ; j < seat[i].length; j++){
+      //     if(seat[i][j] == Number){
+      //       System.out.println((j+1) + " " + (i+1));
+      //     }
+      //   }
+      // }
+      
+      if(Number > maxNum){
+        System.out.println(0);
+      }
+      else{
+      for(int i = 0 ; i < XYnum.size(); i++){
+        if(XYnum.get(i).Count == Number){
+          System.out.println(XYnum.get(i).X + " " + XYnum.get(i).Y);
+        }
+      }
+        
+        // System.out.println(XYnum.get(i).Count + "   " +  XYnum.get(i).X + " " + XYnum.get(i).Y);
+      }
+
+    }
+    
+    public static class XY {
+      int Count;
+      int X;
+      int Y; 
+      
+      XY(int Count , int X , int Y){
+        this.Count = Count;
+        this.X = X;
+        this.Y = Y;
+      }
+      
+    }
+    
+    
+}

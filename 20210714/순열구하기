@@ -1,0 +1,54 @@
+import java.util.*;
+public class Main{
+	static Scanner sc = new Scanner(System.in);
+	static int n = sc.nextInt();
+	static int r = sc.nextInt();
+	static char[] result = new char[r];
+	static boolean[] check = new boolean[n];
+	
+    public static void main(String[] args){
+      
+      
+      if(n > 7 && r > 7){
+        r = Math.min(n, 7);
+      }
+      if(n > 10){
+        n = 10;
+      }
+      if(n < 1){
+        n = 1;
+      }
+      if(r > n){
+        r = n;
+      }
+      // System.out.println(n + "  " + r);
+    	permutation(0);
+      
+    }
+    
+    public static void permutation(int x) {
+    	if(x >= r) {
+    		for(int i = 0 ; i < result.length; i++) {
+    		  if(result[i] != ' ')
+    			System.out.print(result[i]);
+    		}
+    		System.out.println();
+    	}
+    	else {
+    		for(int i = 0; i < n; i++) {
+    			char alpha = (char)(i + 'a');
+    			if(check[i] == false) {
+    				result[x] = alpha;
+    				check[i] = true; // 같은알파벳을 썻나 안썻나 판별하기 
+    				permutation(x+1); // 다음 포문으로 넘어가기
+    				
+    				// x 번째 포문이 수행을 모두 마치면 다시 순열을 구해야함 따라서
+    				check[i] = false; // 난 알파벳 다썻으니까 너네도 써야하므로 다시 false 로 해줌.
+    				result[x] = 0; // 해당포문에돌던 줄을 초기화해줌
+    				
+    			}
+    			
+    		}
+    	}
+    }
+}

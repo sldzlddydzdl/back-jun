@@ -1,0 +1,36 @@
+
+import java.util.*;
+public class Main{
+  
+  static List<Integer> result = new ArrayList<>();
+  
+    public static void main(String[] args){
+
+       // Please Enter Your Code Here
+      Scanner sc = new Scanner(System.in);
+      
+      int Num = sc.nextInt();
+      
+      divide(Num);     
+      
+    }
+    
+    
+    public static void divide(int Num ){
+      if(Num == 1){
+    	result.add(1);  
+    	Integer[] numbers = result.toArray(new Integer[result.size()]);
+    	
+        for(int i = numbers.length-1 ;  i >= 0; i --) {
+          System.out.print(numbers[i]);
+        }
+        
+      }
+      else{
+        result.add(Num%2);
+        Num = Num / 2;
+        divide(Num);
+      }
+      
+    }
+}

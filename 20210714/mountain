@@ -1,0 +1,27 @@
+import java.util.*;
+public class Main{
+  
+  static int[] count = new int[20];
+  
+    public static void main(String[] args){
+
+       // Please Enter Your Code Here
+      Scanner sc = new Scanner(System.in);
+      
+      int n = sc.nextInt();
+      
+      mountain(n);
+      
+    }
+    
+    public static void mountain(int n ){
+      if(n >= 2){
+        mountain(n-1);
+      }
+      System.out.print(n);
+      if(n >= 2){
+        mountain(n-1);
+      }
+    }
+}
+

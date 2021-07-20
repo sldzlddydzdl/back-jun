@@ -1,0 +1,43 @@
+import java.util.*;
+public class Main{
+	
+	static long ans = 10000000000L;
+	
+    public static void main(String[] args){
+
+       // Please Enter Your Code Here
+    	Scanner sc = new Scanner(System.in);
+
+		int n = sc.nextInt();
+		long k = sc.nextInt();
+
+		binarySearch(1, n * n, k, n);
+		System.out.println(ans);
+    }
+    
+    public static void binarySearch(long start, long end, long k, int n) {
+
+		if (start > end) {
+			return;
+		} else {
+			long sum = 0;
+			long mid = (start + end) / 2;
+			for (int i = 1; i <= n; i++) {
+				long num = mid / i;
+				if (num > n) {
+					num = n;
+				}
+				sum += num;
+			}
+
+			if (sum < k) {
+				binarySearch(mid + 1, end, k, n);
+			} else {
+				if (ans > mid) {
+					ans = mid;
+				}
+				binarySearch(start, mid - 1, k, n);
+			}
+		}
+	}
+}

@@ -1,0 +1,69 @@
+import java.util.*;
+
+class Solution {
+    public int[] solution(String[] id_list, String[] report, int k) {
+        
+        Set<String> depulicate = new HashSet<>();
+		
+		for(int i = 0 ; i < report.length; i++) {
+			depulicate.add(report[i]);
+		}
+		
+		List<String> newString = new ArrayList<String>();
+		
+		Iterator<String> iter = depulicate.iterator();
+		while(iter.hasNext()) {
+			newString.add(iter.next());
+		}
+		
+		
+		Map<String , Integer> reportMap = new HashMap<>();
+		
+		for(int i = 0 ; i < newString.size(); i++) {
+			
+			String[] s2 = newString.get(i).split("\\s");
+			
+			reportMap.put(s2[1] , reportMap.getOrDefault(s2[1], 0) + 1);			
+			
+		}
+		
+		
+		List<String> overReport = new ArrayList<String>();
+		
+		for(String s : reportMap.keySet()) {
+			
+			if(reportMap.get(s) >= k) {
+				overReport.add(s);
+			}
+			
+		}
+		
+		Map<String, Integer> amountCount = new HashMap<String, Integer>();
+		
+		for(int i = 0 ; i < newString.size(); i++) {
+			String[] s2 = newString.get(i).split("\\s");
+			
+			for(int j = 0 ; j < overReport.size(); j++) {
+				if(s2[1].equals(overReport.get(j))) {
+					amountCount.put(s2[0], amountCount.getOrDefault(s2[0] ,  0)+1);
+				}
+			}
+			
+		}
+	
+		
+		int[] result = new int[id_list.length];
+		
+		for(int i = 0 ; i < id_list.length; i++) {
+			
+			for(String s : amountCount.keySet()) {
+				if(id_list[i].equals(s)) {
+					result[i] = amountCount.get(s);
+				}
+			}
+		}
+	
+        
+        return result;       
+    }
+}

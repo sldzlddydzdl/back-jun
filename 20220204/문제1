@@ -1,0 +1,69 @@
+package main;
+
+import java.util.*;
+
+public class 문제1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		String s = "Jackdaws love my big sphinx of quartz";
+		
+		List<Character> chars = new ArrayList<>();
+
+		for(char i = 'a'; i <= 'z'; i++) {
+			chars.add(i);
+		}
+		
+		String s2 = s.toLowerCase();
+		
+		System.out.println(s2);
+		
+		String s3 = s2.replaceAll("\\s", "");
+		
+		System.out.println(s3);
+		
+		char[] stringTochar = s3.toCharArray();
+		
+		Arrays.sort(stringTochar);
+		
+		Set<Character> setChar = new HashSet<>();
+		
+		for(char c : stringTochar) {
+			System.out.print(c);
+			if((int)(c) <= 122 && (int)(c) >= 97) {
+				setChar.add(c);
+			}
+		}
+		
+		List<Character> nowChar = new ArrayList<>();
+		
+		Iterator<Character> iterChar = setChar.iterator();
+		while(iterChar.hasNext()) {
+			nowChar.add(iterChar.next());
+		}
+		
+		System.out.println();
+		
+		String result = "";
+		
+		for(Character c : chars) {
+			System.out.print(c);
+			if(nowChar.contains(c)) {
+				
+			}else {
+				result += c;
+			}
+		}
+		
+		System.out.println();
+		
+		if(result.length() == 0) {
+			result = "perfect";
+		}
+		
+		System.out.println(result);
+		
+	}
+
+}

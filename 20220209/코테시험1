@@ -1,0 +1,94 @@
+package main;
+
+import java.util.*;
+
+public class 아이투맥스3 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+//		int N = 3;
+//		int[] coffee_times = {4 ,2, 2, 5, 3};
+		
+//		int N = 1;
+//		int[] coffee_times = {100 ,1, 50, 1, 1};
+		
+		int N = 5;
+		int[] coffee_times = {4 ,1, 4, 1, 1 , 3, 3};
+		
+		List<coffee> coffeeTimeList = new ArrayList<>();
+		List<coffee> making = new ArrayList<>();
+		List<Integer> result = new ArrayList<>();
+
+		for(int i = 0 ; i < coffee_times.length; i++) {
+			coffee c1 = new coffee();
+			c1.coffee = coffee_times[i];
+			c1.index = i+1;
+			coffeeTimeList.add(c1);
+		}
+		
+		int second = 0;
+		if( N < coffee_times.length) {
+			for(int i = 0; i < N; i++) {
+				making.add(coffeeTimeList.get(i));
+			}
+			while(result.size() < coffee_times.length) {
+				for(int i = 0; i < making.size(); i++) {
+					making.get(i).coffee -= 1;
+				}
+				for(int i = 0 ; i < making.size(); i++) {
+					if(making.get(i).coffee == 0) {
+						result.add(making.get(i).index);
+						if(N == coffeeTimeList.size()) {
+							
+						}
+						else {
+							making.add(coffeeTimeList.get(N));
+						}
+						if(N < coffeeTimeList.size()) {
+							N++;	
+						}
+					}
+				}
+			}
+			
+		}
+		else {
+			for(int i = 0 ;  i < coffeeTimeList.size(); i++) {
+				making.add(coffeeTimeList.get(i));
+			}
+			
+			while(!making.isEmpty()) {
+				for(int i = 0 ; i < making.size(); i++) {
+					making.get(i).coffee -= 1;
+					if(making.get(i).coffee == 0) {
+						result.add(making.get(i).index);
+						making.remove(i);
+					}
+				}
+			}
+		}
+		
+		for(int i = 0; i <making.size(); i++) {
+			System.out.println(i + " : " + making.get(i).coffee + "," + making.get(i).index);
+		}
+		
+		for(int i = 0 ;i < result.size(); i++) {
+			System.out.println(result.get(i));
+		}
+	}
+	
+	static class coffee {
+		int coffee;
+		int index;
+		
+		coffee(){
+			
+		}
+		
+		coffee(int coffee, int index){
+			this.coffee  = coffee;
+			this.index = index;
+		}
+	}
+
+}

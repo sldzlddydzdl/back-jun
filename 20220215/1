@@ -1,0 +1,78 @@
+  public int solution(int[] card, int n) {
+        int answer = 0;
+        //총 카드갯수
+        int cnt = card.length;
+        //임의로 선택한 카드 4개를 저장할 배열의 초기화
+        int[] cards = new int[cnt];
+        //'카드별 개수' 저장(카드의 원소는 1 이상 9 이하인 자연수이므로 배열의 크기를 9으로 설정 )
+        int[] cardCnt = new int[9];
+        //'카드별 사용개수' 저장
+        int[] cardUserd = new int[9];
+        //선택된 4개의 카드들을 담을 array
+        ArrayList<String> cardList = new ArrayList<String>(); 
+        
+        //cardCnt[]에 card별 개수를 저장
+        for(int i : card)
+        	cardCnt[i] = cardCnt[i]+=1;
+
+        int index = 0; //cards[]배열의 index 위치, 총 4개의 카드를 저장
+        boolean forward = true, loop = true;
+        while(loop){
+        	//forward 방향으로 숫자를 채워나간다.
+        	if(forward){
+        		//4개의 카드를 순차적으로 선택해서 cards[]배열에 저장한다.
+	        	for(int pos=index; pos<cnt; pos++){
+	        		//선택 가능한 카드가 있는지 순차적으로 cardCnt[i]와 cardUserd[i]를 비교하여 확인
+	        		for(int i=0; i<9; i++){
+	        			//사용가능한 카드를 cards[pos]에 할당
+	        			if( cardCnt[i]>0 && cardCnt[i] > cardUserd[i] ){
+	        				//*test*/System.out.println("forwd-cards["+pos+"]="+i);
+	        				cards[pos] = i;
+	        				cardUserd[i] += 1; //사용한 카드는 사용개수를 +1 한다.
+	        				index = pos; //cards[]에서의 마지막 index 위치를 저장
+	        				break; //다음 카트를 선택할 수 있게 빠져나온다.
+	        			}
+	        		}
+	        	}
+	        	forward = false; //forward 방향으로 모두 선택했으므로 다음 단계에서는 마지막 카드부터 변경한다.
+        	}else{
+        		boolean exit = false;
+        		for(int pos=index; pos>=0; pos--){
+        			//현재 위치에 있는 카드의 사용개수를 -1 한다.
+        			cardUserd[cards[pos]] -= 1; //사용횟수를 -1한다.
+        			//현재 위치에 있는 카드('cards[pos]') 보다 더 큰 카드가 있는지 확인
+        			for(int i=cards[pos]+1; i<9; i++){
+        				if( cardCnt[i]>0 && cardCnt[i] > cardUserd[i] ){
+	        				cards[pos] = i; //있다면 더 큰 카드로 교체
+	        				cardUserd[i] += 1; //선택된 카드의 사용개수를 +1 한다.
+	        				index = pos+1; //다음번 카드를 선택할 수 있도록 index 위치를 +1 한다.
+	        				exit = true; //다시 forward 방향으로 선택하도록 빠져나간다.
+	        				break;
+        				}
+        			}
+        			if( exit ) break;
+        		}
+				forward = true; //forward 방향으로 선택하도록 변경
+        	}
+        	//현재까지 사용중인 카드 개수를 반환
+        	int sumUCnt = 0;
+        	for( int uCnt : cardUserd ){
+        		sumUCnt += uCnt;
+        	}
+        	//카드를 모두 사용중이라면
+        	if( sumUCnt == cnt ){ 
+            	String cardNum = "";
+                for(int nm : cards) //선택된 4개의 카드를 단일 문자열로 만들어서...
+                	cardNum += nm;
+                cardList.add(cardNum); //cardList에 저장
+        	}else if(sumUCnt == 0){ //더 이상 선택할 카드가 없는 경우, 즉 경우 수가 끝인 경우
+        		loop = false;
+        	}
+        }
+        //주어진 숫자카드(=n)가 전체 숫자카드(=cardList)의 조합에서 몇 번째인지 확인
+        answer = -1;
+        for(int i=0; i<cardList.size(); i++){
+        	if(cardList.get(i).equals(n+"")) answer = i+1;
+        }
+        return answer;
+    }
